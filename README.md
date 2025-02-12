@@ -41,3 +41,5 @@ wire [YYY:0] ram_address; //YYY+1 addresses
 reg [31:0] ram_mem[0:ZZZ]; //32 bit wide mem with ZZZ+1 locations
 $readmemh("program.dat", ram_mem);
 ```
+### PRD created by Dr. Jennifer Winikus, Lehigh University P.C. Rossin College of Engineering, Department of ECE
+&copy; Dr. Jennifer Winikus
