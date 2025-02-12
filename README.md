@@ -18,17 +18,26 @@ cycle processor design.
 
 ## Goals
 1. Read the instructions from the ROM-Resident Code
-
 2. Process instructions based on the RISC-V ISA to generate control signals
-
 3. This includes register selection and immediate values
-
 4. Optimize the design for ASIC production
 
 ## ISA
 The instructions processor must support a subset of RV32I and all RV32A instructions.
 The instructions from RV32I that must be included are: addi, ori, andi, lw, sw
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
 You may reference the green card from Dr. Arrvindh Shriraman from Simon Fisher
 University for instruction format: [https://www.cs.sfu.ca/~ashriram/Courses/CS295/assets/notebooks/RISCV/RISCV_CARD.
 pdf]()
+
+## Instruction Memory
+For simplicity of testing, you should use the following code elements to develop and load
+values into the ROM for your program. You can use other approaches if you want as well.
+(Order and appropriate placement has not been provided, they may belong in your design
+or the testbench)
+
+```Verilog
+wire [XXX:0] address; // XXX+1 address lines from cpu
+wire [YYY:0] ram_address; //YYY+1 addresses
+reg [31:0] ram_mem[0:ZZZ]; //32 bit wide mem with ZZZ+1 locations
+$readmemh("program.dat", ram_mem);
+```
