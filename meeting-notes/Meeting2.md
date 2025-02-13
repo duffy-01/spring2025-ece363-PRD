@@ -46,6 +46,7 @@ $readmemh("program.dat", ram_mem);
 
 # Tasks
 - [ ] Implement .sv files as soon as possible for harnessing and verification processes. Note: save ipu.sv and ipu_tb for Tuesday.
+- [ ] Implement TB.sv files for each completed module.
 - [ ] Write introductory sections, perhaps conduct some literature search for relevant RISC-V info.
 - [ ] Generate block diagram of design overview. Verify correctness in approach.
 
