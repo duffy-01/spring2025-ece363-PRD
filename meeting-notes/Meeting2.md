@@ -3,7 +3,7 @@ Liam Burke, Shane Duffy
 
 ## Written Organization
 ### Executive Summary
-* We will treat the executive summary as a problem proposition section.
+* We will treat the executive summary as a problem proposition section. 
 
 ### Secondary Summary
 * Background into RISC-V
@@ -30,11 +30,12 @@ Liam Burke, Shane Duffy
   * 32-bit everything!
  
 ## ALU
-* lw, pull 32-bit item from memory, put in regitser
+* lw, pull 32-bit item from memory, put in register
 * sw, pull a 32-bit register value into memory
 * addi, ori, andi ---> self explanatory
 
 ## Memory
+* Need to **implement separate file**
 ```Verilog
 wire [XXX:0] address;
 // XXX+1 address lines from cpu​
@@ -42,3 +43,4 @@ wire [YYY:0] ram_address; //YYY+1 addresses​
 reg [31:0] ram_mem[0:ZZZ]; //32 bit wide mem with ZZZ+1 locations​
 $readmemh("program.dat", ram_mem);
 ```
+
