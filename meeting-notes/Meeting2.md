@@ -44,3 +44,8 @@ reg [31:0] ram_mem[0:ZZZ]; //32 bit wide mem with ZZZ+1 locations​
 $readmemh("program.dat", ram_mem);
 ```
 
+# Tasks
+- [ ] Implement .sv files as soon as possible for harnessing and verification processes. Note: save ipu.sv and ipu_tb for Tuesday.
+- [ ] Write introductory sections, perhaps conduct some literature search for relevant RISC-V info.
+- [ ] Generate block diagram of design overview. Verify correctness in approach.
+
