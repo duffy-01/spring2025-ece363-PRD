@@ -1,6 +1,6 @@
 
 # PRD Meeting 1
-Shane Duffy
+Shane Duffy, Liam Burke
 
 ## GitHub.
 * Add Liam to GitHub. 
