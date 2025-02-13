@@ -4,7 +4,7 @@
 // Class: ECE 363 - Design of Digital Systems
 // Assignment: PRD Option 1
 // Due date: (Initial submission) Friday, 21 February 2025 @ 23:59
-//Update alu.sv with header
+//
 // Purpose of program: Implement basic instruction set.
 //
 // Filename: instruction_rom.sv
