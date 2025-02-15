@@ -22,34 +22,31 @@
 | 0100  |   alu_out = memaddress;   lw
 
 */
-
+`include "definitions.sv"
 module alu(
   input [31:0] A, B,
-  input [3:0] op_code,
+  input [3:0] alu_op,
   output [31:0] alu_out,
   output carry_out
 );
-  reg [7:0] alu_result;
-  wire [8:0] tmp;
+  reg [31:0] alu_result;
+  wire [32:0] tmp;
   
-  assign ALU_Out = ALU_Result; // ALU out
+  assign alu_out = alu_result; // ALU out
   assign tmp = {1'b0,A} + {1'b0,B};
-  assign CarryOut = tmp[8]; // Carryout flag
+  assign carry_out = tmp[32]; // Carryout flag
   
   always @(*)
     begin
-        case(ALU_Sel)
-        4'b0000: // add
-           alu_result = A + B ; 
-        4'b0001: // and
-           alu_result = A & B ;
-        4'b0010: // or
-           alu_result = A | B;
-        4'b0011: // sw
-           alu_result = foo;
-        4'b0100: // lw
-           alu_result = bar;
-      default: alu_result = NULL; 
+        case(alu_op)
+        `ALU_ADD:    alu_result = A + B ;           // add / atom add / address calculations 
+        `ALU_AND:    alu_result = A & B ;           // and / atom and
+        `ALU_OR:     alu_result = A | B;            // or / atom or
+        `ALU_SWAP:   alu_result = B;                // atomic swap
+		`ALU_XOR:    alu_result = A ^ B;            // atomic xor
+		`ALU_MAX:    alu_result = (A > B) ? A : B;  // atomic Max
+		`ALU_MIN:    alu_result = (A > B) ? B : A;  // atomic Min
+        default:     alu_result = 32'b0;            // default 0
     endcase
   end
 endmodule
