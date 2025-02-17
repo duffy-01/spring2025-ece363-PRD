@@ -13,13 +13,13 @@
 // Date of last modification: Thursday, 13 February 2025 @ 11:49
 //*************************************************************************
 
-/* ALU Arithmetic and Logic Operations
-| alu_op |  ALU Operation
-|  0000  |  alu_out = A + B;        addi
-|  0001  |  alu_out = A & B;        andi
-|  0010  |  alu_out = A | B;        ori
-|  0011  |  alu_out = memaddress;   sw
-|  0100  |  alu_out = memaddress;   lw
+/* ALU Arithmetic and Logic Operations (funct3 column)
+| alu_op |  ALU Operation 
+|  0000  |  alu_out = A + B;        addi	opcode: 0010011
+|  1000  |  alu_out = A & B;        andi		=
+|  0111  |  alu_out = A | B;        ori			=
+|  0010  |  alu_out = memaddress;   sw		opcode: 0100011
+|  0010  |  alu_out = memaddress;   lw		opcode: 0000011
 
 */
 `include "definitions.sv"
