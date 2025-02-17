@@ -14,12 +14,12 @@
 //*************************************************************************
 
 /* ALU Arithmetic and Logic Operations
-|ALU_Sel|   ALU Operation
-| 0000  |   alu_out = A + B;        addi
-| 0001  |   alu_out = A & B;        andi
-| 0010  |   alu_out = A | B;        ori
-| 0011  |   alu_out = memaddress;   sw
-| 0100  |   alu_out = memaddress;   lw
+| alu_op |  ALU Operation
+|  0000  |  alu_out = A + B;        addi
+|  0001  |  alu_out = A & B;        andi
+|  0010  |  alu_out = A | B;        ori
+|  0011  |  alu_out = memaddress;   sw
+|  0100  |  alu_out = memaddress;   lw
 
 */
 `include "definitions.sv"
