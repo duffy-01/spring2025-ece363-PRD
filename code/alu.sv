@@ -13,13 +13,13 @@
 // Date of last modification: Thursday, 13 February 2025 @ 11:49
 //*************************************************************************
 
-/* ALU Arithmetic and Logic Operations
-|ALU_Sel|   ALU Operation
-| 0000  |   alu_out = A + B;        addi
-| 0001  |   alu_out = A & B;        andi
-| 0010  |   alu_out = A | B;        ori
-| 0011  |   alu_out = memaddress;   sw
-| 0100  |   alu_out = memaddress;   lw
+/* ALU Arithmetic and Logic Operations (funct3 column)
+| alu_op |  ALU Operation 
+|  0000  |  alu_out = A + B;        addi	opcode: 0010011
+|  1000  |  alu_out = A & B;        andi		=
+|  0111  |  alu_out = A | B;        ori			=
+|  0010  |  alu_out = memaddress;   sw		opcode: 0100011
+|  0010  |  alu_out = memaddress;   lw		opcode: 0000011
 
 */
 `include "definitions.sv"
@@ -39,13 +39,13 @@ module alu(
   always @(*)
     begin
         case(alu_op)
-        `ALU_ADD:    alu_result = A + B ;           // add / atom add / address calculations 
-        `ALU_AND:    alu_result = A & B ;           // and / atom and
-        `ALU_OR:     alu_result = A | B;            // or / atom or
-        `ALU_SWAP:   alu_result = B;                // atomic swap
-		`ALU_XOR:    alu_result = A ^ B;            // atomic xor
-		`ALU_MAX:    alu_result = (A > B) ? A : B;  // atomic Max
-		`ALU_MIN:    alu_result = (A > B) ? B : A;  // atomic Min
+          `ALU_ADD:    alu_result = A + B ;           // add / atom add / address calculations 
+          `ALU_AND:    alu_result = A & B ;           // and / atom and
+          `ALU_OR:     alu_result = A | B;            // or / atom or
+          `ALU_SWAP:   alu_result = B;                // atomic swap
+          `ALU_XOR:    alu_result = A ^ B;                // atomic xor
+          `ALU_MAX:    alu_result = (A > B) ? A : B;      // atomic Max
+          `ALU_MIN:    alu_result = (A > B) ? B : A;      // atomic Min
         default:     alu_result = 32'b0;            // default 0
     endcase
   end
