@@ -12,3 +12,9 @@
 //
 // Date of last modification: Thursday, 13 February 2025 @ 12:03
 //*************************************************************************
+
+module instruction_rom(
+	input [31:0] address,
+	output [31:0] instruction
+);
+endmodule

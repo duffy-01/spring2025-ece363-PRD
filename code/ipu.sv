@@ -12,3 +12,11 @@
 //
 // Date of last modification: Thursday, 13 February 2025 @ 12:05
 //*************************************************************************
+
+module ipu(
+	input clk,
+	input reset,
+	output [31:0] pc,
+	output [31:0] instruction
+);
+endmodule

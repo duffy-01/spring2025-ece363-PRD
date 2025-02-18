@@ -12,3 +12,6 @@
 //
 // Date of last modification: Thursday, 13 February 2025 @ 12:06
 //*************************************************************************
+
+module ipu_tb;
+endmodule
