@@ -16,18 +16,36 @@
 module ipu(
 	input clk,
 	input reset,
-	output [31:0] pc,
+	output reg [31:0] pc,
 	output [31:0] instruction
+);
+	// control inputs
+	wire pc_src, result_src, mem_write, alu_src, reg_write;
+	wire [3:0] alu_control;
+	wire [1:0] imm_src;
 
-	wire [31:0] ;
+	// ALU inputs
+	wire [31:0] A, B, alu_out;
+	wire carry_out;
+
+	// register file inputs
+	wire [4:0] rd, rs1, rs2;
+	wire [31:0] write_data, read_data1, read_data2;
+
+	// memory inputs
+	wire [31:0] address, write_data, read_data;
 
 
-	always @(posedge clk or posedge reset) begin
+	always @(posedge clk or negedge reset) begin
 		if (reset) begin
 			pc <= 32'b0;
 		end
 		else begin
-			pc <= pc + 32'b4;
+			if (pc_src) begin
+				pc <= alu_out;
+			end else begin
+				pc <= pc + 32'b4;
+			end
 		end
 	end
 
@@ -37,9 +55,10 @@ module ipu(
 		.result_src(result_src),
 		.mem_write(mem_write),
 		.alu_control(alu_control),
-		.alu_src(alu_src),
 		.imm_src(imm_src),
-		.reg_write(reg_write)
+		.rd(rd),
+		.rs1(rs1),
+		.rs2(rs2)
 	);
 
 	alu alu_unit(
@@ -49,7 +68,6 @@ module ipu(
 		.alu_out(alu_out),
 		.carry_out(carry_out)
 	);
-
 	memory memory_unit(
 		.clk(clk),
 		.address(address),
@@ -66,9 +84,10 @@ module ipu(
 		.rs1(rs1),
 		.rs2(rs2),
 		.write_data(write_data),
+		.instruction(instruction)
+		.write_data(write_data),
 		.read_data1(read_data1),
 		.read_data2(read_data2)
+	
 	);
-
-);
 endmodule
