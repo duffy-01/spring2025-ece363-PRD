@@ -19,7 +19,7 @@ module memory(
 	input [31:0] write_data,
 	input mem_write,
 	output [31:0] read_data
-);
+	);
 	reg [31:0] RAM [0:1023]; 				// 1024 32-bit words
 
 	// Read operation, continuous
