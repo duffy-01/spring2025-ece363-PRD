@@ -39,6 +39,6 @@ module instruction_rom(
 	end
 
 	always @(*) begin
-		instruction = rom[address[9:2]]; // Addressing by word (4 bytes)
+		instruction = rom[address[9:2]]; // Read instruction from ROM, account for pc+4
 	end
 endmodule

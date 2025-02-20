@@ -10,24 +10,15 @@ module ipu(
 	wire [1:0] imm_src;
 	wire [31:0] instruction;
 
+	// register file inputs
+	wire [4:0] rd, rs1, rs2;
+	reg [31:0] r_write_data; 
+	wire [31:0] r_read_data1, r_read_data2;
+
 	// ALU inputs
 	wire [31:0] A, B, alu_out;
 	wire carry_out;
 
-	// ALU assignments
-	assign A =  r_read_data1;
-	assign B = (alu_src == 1'b0) ? r_read_data2 : instruction[31:20];
-
-	// register file inputs
-	wire [4:0] rd, rs1, rs2;
-	wire [31:0] r_write_data, r_read_data1, r_read_data2;
-
-	// register assignments
-	assign rd = instruction[11:7];
-	assign rs1 = instruction[19:15];
-	assign rs2 = instruction[24:20];
-	assign r_write_data = (alu_src == 1'b0) ? instruction[31:20] : alu_out;
-	
 	// memory inputs
 	wire [31:0] address;
 	wire [31:0] m_write_data, m_read_data;
@@ -35,6 +26,16 @@ module ipu(
 	wire lr;
 	wire sc_success;
 
+
+	// register assignments
+	assign rd = instruction[11:7];
+	assign rs1 = instruction[19:15];
+	assign rs2 = instruction[24:20];
+	assign r_write_data = (alu_src == 1'b0) ? instruction[31:20] : alu_out;
+
+	// ALU assignments
+	assign A =  r_read_data1;
+	assign B = (alu_src == 1'b0) ? r_read_data2 : instruction[31:20];
 	
 	// memory assignments
 	assign address = (imm_src == 2'b10) ? instruction[31:20] : r_read_data2;
@@ -58,16 +59,18 @@ module ipu(
 	
 	// write data assignment
 	always @(*) begin
-		if (result_src) begin
+		if (alu_src == 1'b1 && imm_src == 2'b00) begin // i type instruction
+			r_write_data = instruction[31:20];
+		end
+		else if (alu_src == 1'b1 && imm_src == 2'b10) begin
 			r_write_data = m_read_data;
-		end else begin
+		end 
+		else begin
 			r_write_data = alu_out;
 		end
 	end
 
-
 	// instantiate modules
-
 	instruction_rom rom_unit(
 		.address(pc),
 		.instruction(instruction)
@@ -78,6 +81,7 @@ module ipu(
 		.result_src(result_src),
 		.mem_write(mem_write),
 		.alu_control(alu_control),
+		.alu_src(alu_src),
 		.imm_src(imm_src),
 		.reg_write(reg_write)
 	);

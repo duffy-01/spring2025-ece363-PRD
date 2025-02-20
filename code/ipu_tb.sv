@@ -14,4 +14,40 @@
 //*************************************************************************
 
 module ipu_tb;
+	// Inputs
+	reg clk;
+	reg reset;
+	reg [31:0] pc;
+	//dut 
+	ipu dut(
+		.clk(clk),
+		.reset(reset),
+		.pc(pc)
+	);
+	always begin
+		#10 clk = ~clk;
+	end
+	initial begin //reset then run
+		clk = 0;
+		reset = 1;
+		#10 reset = 0;
+	end
+
+	//runtime catch
+	initial begin
+		#2000 $finish;
+	end
+
+	//waveform creation (dve)
+	initial begin
+		$dumpfile("ipu_tb.vcd");
+		$dumpvars(0, ipu_tb);
+		$display("Dumping VCD file");
+		$display("Simulation started");
+		$monitor("pc = %b", pc);
+	end
+
+	intial begin $monitor("pc = %b", pc); end
+
+
 endmodule

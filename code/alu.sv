@@ -22,6 +22,7 @@
 |  0010  |  alu_out = memaddress;   lw		opcode: 0000011
 
 */
+`include "definitions.sv"
 module alu(
   input [31:0] A, B,
   input [3:0] alu_op,

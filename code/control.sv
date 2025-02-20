@@ -25,10 +25,8 @@ module control(
 
 	always @(*) begin
 		// Default values
-		pc_src = 0; result_src = 0; mem_write = 0; alu_control = `ALU_ADD; 
+		pc_src = 0; result_src = 0; mem_write = 0;
 		alu_src = 0; imm_src = 2'b00; reg_write = 0;
-		reservation_flag = 0;  // Reset reservation flag unless modified
-
 		case (opcode)
 			`OPCODE_I: begin
 				imm_src = 2'b00;
