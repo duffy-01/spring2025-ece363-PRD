@@ -32,6 +32,8 @@
 `define ALU_XOR        4'b0100     //xor ops
 `define ALU_MAX		   4'b0101     //max ops
 `define ALU_MIN        4'b0110     //min ops
+`define ALU_LR		   4'b0111     //max ops
+`define ALU_SC        4'b1000     //min ops
 
 // ----------------------------
 

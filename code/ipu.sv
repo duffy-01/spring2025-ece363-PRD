@@ -1,18 +1,4 @@
-//*************************************************************************
-// Author(s): Liam Burke, Shane Duffy
-// Creation Date: Tuesday, 11 February 2025
-// Class: ECE 363 - Design of Digital Systems
-// Assignment: PRD Option 1
-// Due date: (Initial submission) Friday, 21 February 2025 @ 23:59
-//
-// Purpose of program: Full implementation of RISC-V IPU.
-//
-// Filename: ipu.sv
-// Additional files needed: N/A
-//
-// Date of last modification: 18 February 2025
-//*************************************************************************
-
+`include "definitions.sv"
 module ipu(
 	input clk,
 	input reset,
@@ -30,11 +16,11 @@ module ipu(
 
 	// ALU assignments
 	assign A =  r_read_data1;
-	assign B = (imm_src == 2'b00) ? r_read_data2 : instruction[31:20];
+	assign B = (alu_src == 1'b0) ? r_read_data2 : instruction[31:20];
 
 	// register file inputs
 	wire [4:0] rd, rs1, rs2;
-	wire [31:0] r_write_data, r_read_data1, r_read_data2;_
+	wire [31:0] r_write_data, r_read_data1, r_read_data2;
 
 	// register assignments
 	assign rd = instruction[11:7];
@@ -43,17 +29,24 @@ module ipu(
 	assign r_write_data = (alu_src == 1'b0) ? instruction[31:20] : alu_out;
 	
 	// memory inputs
-	wire [9:0] address;
+	wire [31:0] address;
 	wire [31:0] m_write_data, m_read_data;
+	wire sc;
+	wire lr;
+	wire sc_success;
+
 	
-	//// memory assignments
+	// memory assignments
 	assign address = (imm_src == 2'b10) ? instruction[31:20] : r_read_data2;
 	assign m_write_data = r_read_data2;
+	assign sc = (alu_control == `ALU_SC);
+	assign lr = (alu_control == `ALU_LR);
 
+	// program counter assignment
 	always @(posedge clk or negedge reset) begin
-		if (reset) begin
+		if (!reset) begin
 			pc <= 32'b0;
-		end
+		end 
 		else begin
 			if (pc_src) begin
 				pc <= alu_out;
@@ -62,6 +55,18 @@ module ipu(
 			end
 		end
 	end
+	
+	// write data assignment
+	always @(*) begin
+		if (result_src) begin
+			r_write_data = m_read_data;
+		end else begin
+			r_write_data = alu_out;
+		end
+	end
+
+
+	// instantiate modules
 
 	instruction_rom rom_unit(
 		.address(pc),
@@ -74,9 +79,7 @@ module ipu(
 		.mem_write(mem_write),
 		.alu_control(alu_control),
 		.imm_src(imm_src),
-		.read_data(read_data),
-		.read_reg1(read_reg1),
-		.read_reg12(read_reg12)
+		.reg_write(reg_write)
 	);
 	alu alu_unit(
 		.A(A),
@@ -90,15 +93,18 @@ module ipu(
 		.address(address),
 		.write_data(m_write_data),
 		.mem_write(mem_write),
-		.read_data(m_read_data)
+		.read_data(m_read_data),
+		.lr(lr),
+		.sc(sc),
+		.sc_success(sc_success)
 	);
 
-	register_file register_file_unit(
+	register register_file_unit(
 		.clk(clk),
 		.reset(reset),
-		.read_reg1(read_reg1),
-		.read_reg2(read_reg2),
-		.write_reg(write_reg),
+		.read_reg1(rs1),
+		.read_reg2(rs2),
+		.write_reg(rd),
 		.write_data(r_write_data),
 		.reg_write(reg_write),
 		.read_data1(r_read_data1),

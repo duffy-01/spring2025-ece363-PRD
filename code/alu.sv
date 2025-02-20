@@ -22,7 +22,6 @@
 |  0010  |  alu_out = memaddress;   lw		opcode: 0000011
 
 */
-`include "definitions.sv"
 module alu(
   input [31:0] A, B,
   input [3:0] alu_op,
@@ -43,11 +42,12 @@ module alu(
           `ALU_AND:    alu_result = A & B ;           // and / atom and
           `ALU_OR:     alu_result = A | B;            // or / atom or
           `ALU_SWAP:   alu_result = B;                // atomic swap
-          `ALU_XOR:    alu_result = A ^ B;                // atomic xor
-          `ALU_MAX:    alu_result = (A > B) ? A : B;      // atomic Max
-          `ALU_MIN:    alu_result = (A > B) ? B : A;      // atomic Min
-        default:     alu_result = 32'b0;            // default 0
+          `ALU_XOR:    alu_result = A ^ B;            // atomic xor
+          `ALU_MAX:    alu_result = (A > B) ? A : B;  // atomic Max
+          `ALU_MIN:    alu_result = (A > B) ? B : A;  // atomic Min
+          //`ALU_LR:     alu_result = A;                // load reserved
+          //`ALU_SC:     alu_result = (A == B) ? 32'b1 : 32'b0; // store conditional
+          default:     alu_result = 32'b0;            // default 0
     endcase
   end
 endmodule
-  
