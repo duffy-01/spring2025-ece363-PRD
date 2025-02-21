@@ -5,7 +5,7 @@ module ipu(
 	output reg [31:0] pc
 );
 	// control inputs
-	wire pc_src, addr_src, mem_write, alu_src, reg_write;
+	wire pc_src, result_src, mem_write, alu_src, reg_write;
 	wire [3:0] alu_control;
 	wire [1:0] imm_src;
 	wire [31:0] instruction;
@@ -40,8 +40,8 @@ module ipu(
 	assign B = (alu_src == 1'b0) ? r_read_data2 : immediate;
 	
 	// memory assignments
-	assign address = (addr_src == 0) ? alu_out : r_read_data1;
-	assign m_write_data = r_read_data2;
+	assign address = (imm_src == 2'b00) ? r_read_data1 : alu_out;
+	assign m_write_data = (imm_src == 2'b00) ? alu_out : r_read_data2;
 	assign sc = (alu_control == `ALU_SC);
 	assign lr = (alu_control == `ALU_LR);
 
@@ -61,14 +61,14 @@ module ipu(
 	
 	// write data assignment
 	always @(*) begin
-		if (alu_src == 1'b1 && imm_src == 2'b10) begin
-			r_write_data = m_read_data;
+		if (sc_success == 1'b1) begin
+			r_write_data = 32'b0; //clear rd id sc success
 		end
-		else if (sc_success == 1'b1) begin
-			r_write_data = 32'b0;
+		else if (result_src == 1) begin
+			r_write_data = m_read_data; //if result_src = 1, we write from memory to reg
 		end
 		else begin
-			r_write_data = alu_out;
+			r_write_data = alu_out; //otherwise, write from alu to reg
 		end
 	end
 
@@ -80,7 +80,7 @@ module ipu(
 	control control_unit(
 		.instruction(instruction),
 		.pc_src(pc_src),
-		.addr_src(addr_src),
+		.result_src(result_src),
 		.mem_write(mem_write),
 		.alu_control(alu_control),
 		.alu_src(alu_src),
