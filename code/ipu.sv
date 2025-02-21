@@ -5,15 +5,18 @@ module ipu(
 	output reg [31:0] pc
 );
 	// control inputs
-	wire pc_src, result_src, mem_write, alu_src, reg_write;
+	wire pc_src, addr_src, mem_write, alu_src, reg_write;
 	wire [3:0] alu_control;
 	wire [1:0] imm_src;
 	wire [31:0] instruction;
 
-	// register file inputs
+	// register file
 	wire [4:0] rd, rs1, rs2;
 	reg [31:0] r_write_data; 
 	wire [31:0] r_read_data1, r_read_data2;
+	//reg_file variable
+	reg [31:0] reg_file [0:31];
+
 
 	// ALU inputs
 	wire [31:0] A, B, alu_out;
@@ -26,26 +29,25 @@ module ipu(
 	wire lr;
 	wire sc_success;
 
-
+	wire [11:0] immediate = (imm_src == 2'b01) ? instruction[31:20] : {instruction[31:25], instruction[11:7]};
 	// register assignments
 	assign rd = instruction[11:7];
 	assign rs1 = instruction[19:15];
 	assign rs2 = instruction[24:20];
-	assign r_write_data = (alu_src == 1'b0) ? instruction[31:20] : alu_out;
 
 	// ALU assignments
 	assign A =  r_read_data1;
-	assign B = (alu_src == 1'b0) ? r_read_data2 : instruction[31:20];
+	assign B = (alu_src == 1'b0) ? r_read_data2 : immediate;
 	
 	// memory assignments
-	assign address = (imm_src == 2'b10) ? instruction[31:20] : r_read_data2;
+	assign address = (addr_src == 0) ? alu_out : r_read_data1;
 	assign m_write_data = r_read_data2;
 	assign sc = (alu_control == `ALU_SC);
 	assign lr = (alu_control == `ALU_LR);
 
 	// program counter assignment
-	always @(posedge clk or negedge reset) begin
-		if (!reset) begin
+	always @(posedge clk or posedge reset) begin
+		if (reset) begin
 			pc <= 32'b0;
 		end 
 		else begin
@@ -59,12 +61,12 @@ module ipu(
 	
 	// write data assignment
 	always @(*) begin
-		if (alu_src == 1'b1 && imm_src == 2'b00) begin // i type instruction
-			r_write_data = instruction[31:20];
-		end
-		else if (alu_src == 1'b1 && imm_src == 2'b10) begin
+		if (alu_src == 1'b1 && imm_src == 2'b10) begin
 			r_write_data = m_read_data;
-		end 
+		end
+		else if (sc_success == 1'b1) begin
+			r_write_data = 32'b0;
+		end
 		else begin
 			r_write_data = alu_out;
 		end
@@ -78,7 +80,7 @@ module ipu(
 	control control_unit(
 		.instruction(instruction),
 		.pc_src(pc_src),
-		.result_src(result_src),
+		.addr_src(addr_src),
 		.mem_write(mem_write),
 		.alu_control(alu_control),
 		.alu_src(alu_src),
@@ -94,6 +96,7 @@ module ipu(
 	);
 	memory memory_unit(
 		.clk(clk),
+		.reset(reset),
 		.address(address),
 		.write_data(m_write_data),
 		.mem_write(mem_write),

@@ -3,7 +3,7 @@
 module control(
 	input [31:0] instruction,
 	output reg pc_src,
-	output reg result_src,
+	output reg addr_src,
 	output reg mem_write, 
 	output reg [3:0] alu_control,
 	output reg alu_src,
@@ -25,11 +25,11 @@ module control(
 
 	always @(*) begin
 		// Default values
-		pc_src = 0; result_src = 0; mem_write = 0;
+		pc_src = 0; addr_src = 0; mem_write = 0;
 		alu_src = 0; imm_src = 2'b00; reg_write = 0;
 		case (opcode)
 			`OPCODE_I: begin
-				imm_src = 2'b00;
+				imm_src = 2'b01;
 				reg_write = 1;
 				mem_write = 0; 
 				alu_src = 1;
@@ -40,11 +40,12 @@ module control(
 				reg_write = 1;
 				mem_write = 1;
 				alu_src = 0;
+				addr_src = 1;
 
 			end
 
 			`OPCODE_LOAD: begin
-				imm_src = 2'b10; 
+				imm_src = 2'b01; 
 				reg_write = 1; 
 				mem_write = 0;
 				alu_src = 1; 
@@ -52,7 +53,7 @@ module control(
 			end
 
 			`OPCODE_STORE: begin
-				imm_src = 2'b01;
+				imm_src = 2'b10;
 				reg_write = 0;
 				mem_write = 1;
  				alu_src = 1;
@@ -60,7 +61,7 @@ module control(
 
 			default: begin
 				pc_src = 0; 
-				result_src = 0; 
+				addr_src = 0; 
 				mem_write = 0;
 				alu_src = 0; 
 				imm_src = 2'b00; 

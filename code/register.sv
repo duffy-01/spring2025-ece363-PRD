@@ -24,8 +24,7 @@ module register(
 	output [31:0] read_data1,	// Data read from register 1
 	output [31:0] read_data2	// Data read from register 2
 );
-	reg [31:0] reg_file [0:31]; //all of our registers
-
+	reg [31:0] reg_file [0:31];
 	// Read operations
 	assign read_data1 = reg_file[read_reg1]; //read reg 1
 	assign read_data2 = reg_file[read_reg2]; //read reg 2

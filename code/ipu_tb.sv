@@ -25,17 +25,17 @@ module ipu_tb;
 		.pc(pc)
 	);
 	always begin
-		#10 clk = ~clk;
+		#20 clk = ~clk;
 	end
 	initial begin //reset then run
 		clk = 0;
 		reset = 1;
-		#10 reset = 0;
+		#20 reset = 0;
 	end
 
 	//runtime catch
 	initial begin
-		#2000 $finish;
+		#600 $finish;
 	end
 
 	//waveform creation (dve)
@@ -47,7 +47,19 @@ module ipu_tb;
 		$monitor("pc = %b", pc);
 	end
 
-	intial begin $monitor("pc = %b", pc); end
+	initial begin $monitor("pc = %b", pc); end
 
+	// Display memory and register contents
+	always @(posedge clk) begin
+		$display("Memory Contents:");
+		for (int i = 0; i < 32; i = i + 1) begin
+			$display("RAM[%0d] = %h", i, dut.memory_unit.RAM[i]);
+		end
+
+		$display("Register File Contents:");
+		for (int j = 0; j < 32; j = j + 1) begin
+			$display("reg_file[%0d] = %h", j, dut.register_file_unit.reg_file[j]);
+		end
+	end
 
 endmodule
