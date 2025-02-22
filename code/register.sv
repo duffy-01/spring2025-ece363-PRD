@@ -22,12 +22,14 @@ module register(
 	input [31:0] write_data,	// Data to write
 	input reg_write,			// Write enable signal
 	output [31:0] read_data1,	// Data read from register 1
-	output [31:0] read_data2	// Data read from register 2
+	output [31:0] read_data2,	// Data read from register 2
+	output [31:0] read_data3	// Data read from reregister rd for atomics
 );
 	reg [31:0] reg_file [0:31];
 	// Read operations
 	assign read_data1 = reg_file[read_reg1]; //read reg 1
 	assign read_data2 = reg_file[read_reg2]; //read reg 2
+	assign read_data3 = reg_file[write_reg]; //read reg 3
 
 	// Write operation
 	always @(posedge clk or posedge reset) begin //on clock edge or reset

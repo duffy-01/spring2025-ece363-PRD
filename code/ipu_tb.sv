@@ -31,11 +31,14 @@ module ipu_tb;
 		clk = 0;
 		reset = 1;
 		#20 reset = 0;
+		if (dut.control_unit.instruction == 32'b1) begin
+			$finish;
+		end
 	end
 
 	//runtime catch
 	initial begin
-		#600 $finish;
+		#2000 $finish;
 	end
 
 	//waveform creation (dve)

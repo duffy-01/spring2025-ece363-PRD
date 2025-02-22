@@ -13,7 +13,7 @@ module ipu(
 	// register file
 	wire [4:0] rd, rs1, rs2;
 	reg [31:0] r_write_data; 
-	wire [31:0] r_read_data1, r_read_data2;
+	wire [31:0] r_read_data1, r_read_data2, r_read_data3;
 	//reg_file variable
 	reg [31:0] reg_file [0:31];
 
@@ -36,7 +36,7 @@ module ipu(
 	assign rs2 = instruction[24:20];
 
 	// ALU assignments
-	assign A =  r_read_data1;
+	assign A = (alu_src == 1'b0 && result_src == 1) ? r_read_data3 : r_read_data1;
 	assign B = (alu_src == 1'b0) ? r_read_data2 : immediate;
 	
 	// memory assignments
@@ -58,8 +58,7 @@ module ipu(
 			end
 		end
 	end
-	
-	// write data assignment
+	// reg write data assignment
 	always @(*) begin
 		if (sc_success == 1'b1) begin
 			r_write_data = 32'b0; //clear rd id sc success
@@ -115,6 +114,7 @@ module ipu(
 		.write_data(r_write_data),
 		.reg_write(reg_write),
 		.read_data1(r_read_data1),
-		.read_data2(r_read_data2)
+		.read_data2(r_read_data2),
+		.read_data3(r_read_data3)
 	);
 endmodule

@@ -33,15 +33,15 @@ module control(
 				reg_write = 1;
 				mem_write = 0; 
 				alu_src = 1;
+				result_src = 0;
 			end
 
 			`OPCODE_ATM: begin
 				imm_src = 2'b00;
 				reg_write = 1;
 				mem_write = 1;
-				alu_src = 1;
+				alu_src = 0;
 				result_src = 1;
-
 			end
 
 			`OPCODE_LOAD: begin

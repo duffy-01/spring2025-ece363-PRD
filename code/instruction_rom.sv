@@ -46,10 +46,10 @@ module instruction_rom(
 		rom[10] = 32'b00001_0_0_00011_01000_010_00111_0101111;
 		// atomic xor reg 7 = M[reg 8], M[reg 8] = reg 7 ^ reg 3
 		rom[11] = 32'b00100_0_0_00011_01000_010_00111_0101111;
-		// atomic max reg 7 = M[reg 8], M[reg 8] = reg 7 > reg 3 ? reg 7 : reg 3
-		rom[12] = 32'b10100_0_0_00011_01000_010_00111_0101111;
-		// atomic min reg 7 = M[reg 8], M[reg 8] = reg 7 > reg 3 ? reg 3 : reg 7
-		rom[13] = 32'b10000_0_0_00011_01000_010_00111_0101111;
+		// atomic max reg 7 = M[reg 8], M[reg 8] = reg 7 > reg 6 ? reg 7 : reg 6
+		rom[12] = 32'b10100_0_0_00110_01000_010_00111_0101111;
+		// atomic min reg 7 = M[reg 8], M[reg 8] = reg 7 > reg 6 ? reg 6 : reg 7
+		rom[13] = 32'b10000_0_0_00110_01000_010_00111_0101111;
 		// atomic and reg 7 = M[reg 8], M[reg 8] = reg 7 & reg 3
 		rom[14] = 32'b01100_0_0_00011_01000_010_00111_0101111;
 		// atomic or reg 7 = M[reg 8], M[reg 8] = reg 7 | reg 3
@@ -62,6 +62,8 @@ module instruction_rom(
 		rom[18] = 32'b00011_0_0_00111_01000_010_00111_0101111;
 		// addi reg 9 = reg 9 + 12
 		rom[19] = 32'b00000001100_01001_000_01001_0010011;
+		//kill command
+		rom[20] = 32'b1;
 	end
 
 	always @(*) begin
