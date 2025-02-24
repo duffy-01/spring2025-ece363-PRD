@@ -22,20 +22,15 @@ module control(
 	output reg alu_src,
 	output reg [1:0] imm_src,
 	output reg reg_write,
-	output reg result_src
+	output reg result_src,
+	output reg atomic_flag,
+	output reg reserved_flag
 );
 
 	// Parse instruction fields
 	wire [6:0] opcode   = instruction[6:0];
 	wire [2:0] funct3   = instruction[14:12];
 	wire [4:0] funct5   = instruction[31:27]; 
-
-	alu_controller alu_ctrl(
-        .opcode(opcode),
-        .funct3(funct3),
-        .funct5(funct5),
-        .alu_control(alu_control)
-    );
 
 	always @(*) begin
 		// Default values
@@ -61,6 +56,7 @@ module control(
 				mem_write = 1;
 				alu_src = 0;
 				result_src = 1;
+				atomic_flag = 1;
 				case (funct5)
 					`F5_ATM_SWAP: alu_control = `ALU_SWAP;   // Swap memory value
 					`F5_ATM_ADD: alu_control = `ALU_ADD;     // Add to memory value
@@ -69,8 +65,8 @@ module control(
 					`F5_ATM_XOR: alu_control = `ALU_XOR;     // XOR with memory value
 					`F5_ATM_MIN: alu_control = `ALU_MIN;
 					`F5_ATM_MAX: alu_control = `ALU_MAX;
-					`F5_ATM_LR:  alu_control = `ALU_ADD;     // Load reserved
-					`F5_ATM_SC:  alu_control = `ALU_ADD;     // Store conditional
+					`F5_ATM_LR:  begin alu_control = `ALU_ADD; reserved_flag = 1; end    // Load reserved
+					`F5_ATM_SC:  begin alu_control = `ALU_ADD;   reserved_flag = 0; end // Store conditional
 				endcase
 			end
 
