@@ -1,0 +1,28 @@
+<session version="1.1" release="W-2024.09-SP1" timestp="2025-04-03 16:32:44 GMT">
+  <info>
+    <attr name="datetime" value="Thu Apr  3 12:32:57 2025
+"/>
+    <attr name="command" value="urg -lca -dir simv.vdb"/>
+    <attr name="top_instance" value="control_top"/>
+  </info>
+  <hvp>
+    <datadef>
+      <metdef name="Line" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Cond" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="Toggle" type="ratio" aggregator="average" builtin="1" />
+      <metdef name="FSM" type="ratio" aggregator="average" builtin="1" />
+    </datadef>
+  </hvp>
+  <old_coverage>
+  <scope type="top" name="top">
+    <metric name="Line" value="52/58" />
+    <metric name="Toggle" value="162/214" />
+  </scope>
+  <scope type="instance" name="top">
+  </scope>
+  <scope type="group" name="top">
+  </scope>
+  <scope type="assert" name="Statistics">
+  </scope>
+  </old_coverage>
+</session>
