@@ -33,8 +33,8 @@ module control_top;
     // system clock
     
     initial begin
-        sys_clk = 0
-        forever begin $(sim_cycle/2) sys_clk = ~sys_clk; end
+        sys_clk = 0;
+        forever begin#(sim_cycle/2) sys_clk = ~sys_clk; end
     end
 
     endmodule

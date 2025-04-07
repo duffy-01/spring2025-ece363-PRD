@@ -18,7 +18,7 @@ program control_tb(control_if.TB control);
 	initial begin //reset then run
 		// Format: rom[address] = instruction;
 		// addi reg 2 = reg 1 + 3
-		#100 instruction = 32'b000000000011_00001_000_00010_0010011;
+		#100 control.instruction = 32'b000000000011_00001_000_00010_0010011;
 		// addi reg 3 = reg 2 + 4
 		#100 control.instruction = 32'b000000000100_00010_000_00011_0010011;
 		// sw mem 0 = reg 3
@@ -57,8 +57,11 @@ program control_tb(control_if.TB control);
 		#100 control.instruction = 32'b00011_0_0_00111_01000_010_00111_0101111;
 		// addi reg 9 = reg 9 + 12
 		#100 control.instruction = 32'b000000000110_01001_000_01001_0010011;
+		// load reserved reg 7 = mem[reg 8]
+		#100 control.instruction = 32'b00010_0_0_00000_01000_010_00111_0101111;
+		// store conditional mem[reg 8] = reg 7
+		#100 control.instruction = 32'b00011_0_0_00111_01000_010_00111_0101111;
 	end
-
 	//runtime catch
 	initial begin
 		#20000 $finish;
@@ -70,7 +73,7 @@ program control_tb(control_if.TB control);
         $dumpvars(0, control_tb);
         $display("Dumping VCD file");
         $display("Simulation started");
-        $monitor("mem_write=%b, reg_write=%b, imm_src=%03b, result_src=%b, pc_src=%b alu_src = %b, alu_control=%04b, atomic_flag=%b, reserved_flag=%b",
+        $monitor("%b, %b, %03b, %b, %b, %b, %04b, %b, %b",
         control.mem_write, control.reg_write, control.imm_src, control.result_src, control.pc_src, control.alu_src, control.alu_control, control.atomic_flag, control.reserved_flag);
     end
 

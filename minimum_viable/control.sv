@@ -3,7 +3,7 @@
 // Creation Date: Tuesday, 11 February 2025
 // Class: ECE 363 - Design of Digital Systems
 // Assignment: PRD Option 1
-*// Due date: (Initial submission) Friday, 21 February 2025 @ 23:59
+// Due date: (Initial submission) Friday, 21 February 2025 @ 23:59
 //
 // Purpose of program: Implement controller. Handles instructions and memory.
 //
@@ -13,7 +13,6 @@
 // Date of last modification: Monday, 24 February 2025 @ 11:50
 //************************************************************************
 
-`ifndef DEFINITIONS_SV
 `define DEFINITIONS_SV
 // ----------------------------
 // RISC-V OPCODES
@@ -60,53 +59,6 @@
 `define F5_ATM_LR	   5'b00010     //load reserved f5 code
 `define F5_ATM_SC	   5'b00011     //store cond f5 code
 // ----------------------------
-
-// ----------------------------
-// GENERAL CONSTANTS
-`define RLEN           32           //register size
-// ----------------------------
-
-
-
-`endif
-
-module alu_controller(
-    input [6:0] opcode,
-    input [2:0] funct3,
-    input [4:0] funct5,
-    output reg [3:0] alu_control
-);
-
-    always @(*) begin
-        case (opcode)
-            `OPCODE_I: begin
-                case (funct3)
-                    `FUNCT3_ADDI: alu_control = `ALU_ADD;
-                    `FUNCT3_ANDI: alu_control = `ALU_AND;
-                    `FUNCT3_ORI:  alu_control = `ALU_OR;
-                    default: alu_control = `ALU_ADD;
-                endcase
-            end
-
-            `OPCODE_ATM: begin
-                case (funct5)
-                    `F5_ATM_SWAP: alu_control = `ALU_SWAP;
-                    `F5_ATM_ADD: alu_control = `ALU_ADD; 
-                    `F5_ATM_AND: alu_control = `ALU_AND;
-                    `F5_ATM_OR:  alu_control = `ALU_OR;
-                    `F5_ATM_XOR: alu_control = `ALU_XOR;
-                    `F5_ATM_MIN: alu_control = `ALU_MIN;
-                    `F5_ATM_MAX: alu_control = `ALU_MAX;
-                    `F5_ATM_LR:  alu_control = `ALU_LR;
-                    `F5_ATM_SC:  alu_control = `ALU_SC;
-                    default: alu_control = `ALU_ADD;
-                endcase
-            end
-            
-            default: alu_control = `ALU_ADD;
-        endcase
-    end
-endmodule
 
 
 //*************************************************************************

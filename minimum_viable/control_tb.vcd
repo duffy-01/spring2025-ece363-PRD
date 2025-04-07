@@ -1,0 +1,39 @@
+$date
+	Thu Apr  3 12:32:39 2025
+$end
+
+$version
+	Synopsys VCS version W-2024.09-SP1_Full64
+$end
+
+$timescale
+	1s
+$end
+
+$comment Csum: 1 c9a554262f145134 $end
+
+
+$scope module control_top $end
+
+$scope module test $end
+
+$scope begin unnamed$$_vcs_2 $end
+$upscope $end
+
+
+$scope begin unnamed$$_vcs_0 $end
+$upscope $end
+
+
+$scope begin unnamed$$_vcs_1 $end
+$upscope $end
+
+$upscope $end
+
+$upscope $end
+
+$enddefinitions $end
+
+#0
+$dumpvars
+$end

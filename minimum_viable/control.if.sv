@@ -10,7 +10,7 @@ interface control_if(input logic clk);
 	logic atomic_flag;
 	logic reserved_flag;
 	clocking cb@(posedge clk);
-		default input #1 output #0
+		default input #1 output #0;
 		output instruction;
 		input pc_src, mem_write, alu_control, alu_src, imm_src, reg_write, result_src, atomic_flag, reserved_flag;
 	endclocking
