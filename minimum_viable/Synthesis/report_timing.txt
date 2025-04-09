@@ -1,0 +1,54 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : control
+Version: W-2024.09-SP2
+Date   : Wed Apr  9 18:34:42 2025
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary_TT
+Wire Load Model Mode: top
+
+  Startpoint: instruction[4]
+              (input port clocked by clk)
+  Endpoint: reg_write (output port clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  control            5K_hvratio_1_1        NangateOpenCellLibrary_TT
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock clk (rise edge)                    0.00       0.00
+  clock network delay (ideal)              1.00       1.00
+  input external delay                     0.25       1.25 f
+  instruction[4] (in)                      0.00       1.25 f
+  U81/ZN (INV_X1)                          0.02       1.27 r
+  U82/ZN (INV_X1)                          0.03       1.30 f
+  U108/ZN (OR4_X1)                         0.14       1.44 f
+  U92/ZN (NOR2_X1)                         0.05       1.49 r
+  U87/ZN (INV_X1)                          0.03       1.52 f
+  U93/ZN (NAND2_X1)                        0.03       1.56 r
+  U89/ZN (INV_X1)                          0.02       1.58 f
+  U88/ZN (NAND2_X1)                        0.02       1.60 r
+  reg_write (out)                          0.00       1.61 r
+  data arrival time                                   1.61
+
+  clock clk (rise edge)                  100.00     100.00
+  clock network delay (ideal)              1.00     101.00
+  clock uncertainty                       -0.50     100.50
+  output external delay                   -0.25     100.25
+  data required time                                100.25
+  -----------------------------------------------------------
+  data required time                                100.25
+  data arrival time                                  -1.61
+  -----------------------------------------------------------
+  slack (MET)                                        98.64
+
+
+1

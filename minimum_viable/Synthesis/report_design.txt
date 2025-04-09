@@ -1,0 +1,88 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : design
+Design : control
+Version: W-2024.09-SP2
+Date   : Wed Apr  9 18:34:42 2025
+****************************************
+
+Design allows ideal nets on clock nets.
+
+Library(s) Used:
+
+    NangateOpenCellLibrary_TT (File: /proj/ece363-spring2025/lmb221/project-code/NangateOpenCellLibrary_typical.db)
+
+Local Link Library:
+
+    {NangateOpenCellLibrary_typical.db}
+
+Flip-Flop Types:
+
+    No flip-flop types specified.
+
+Latch Types:
+
+    No latch types specified.
+
+Operating Conditions:
+
+
+    Operating Condition Name : typical
+    Library : NangateOpenCellLibrary_TT
+    Process :   1.00
+    Temperature :  25.00
+    Voltage :   1.10
+    Interconnect Model : balanced_tree
+
+Wire Loading Model:
+
+    Selected from the default (area not fully known).
+
+Name           :   5K_hvratio_1_1
+Location       :   NangateOpenCellLibrary_TT
+Resistance     :   0.00357143
+Capacitance    :   0.1774
+Area           :   0
+Slope          :   5
+Fanout   Length   Points Average Cap Std Deviation
+--------------------------------------------------------------
+     1     1.75
+     2     3.94
+     3     6.46
+     4     9.22
+     5    11.91
+     6    14.84
+     7    18.62
+     8    22.67
+     9    25.48
+    11    27.03
+
+
+
+Wire Loading Model Mode: top.
+
+Timing Ranges:
+
+    No timing ranges specified.
+
+Pin Input Delays:
+
+    None specified.
+
+Pin Output Delays:
+
+    None specified.
+
+Disabled Timing Arcs:
+
+    No arcs disabled.
+
+Required Licenses:
+
+    None Required
+
+Design Parameters:
+
+    None specified.
+1

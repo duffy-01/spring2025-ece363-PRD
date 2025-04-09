@@ -1,0 +1,81 @@
+ 
+****************************************
+Report : port
+Design : control
+Version: W-2024.09-SP2
+Date   : Wed Apr  9 18:34:42 2025
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+instruction[0] in      0.0000   0.0000   --      --      --         
+instruction[1] in      0.0000   0.0000   --      --      --         
+instruction[2] in      0.0000   0.0000   --      --      --         
+instruction[3] in      0.0000   0.0000   --      --      --         
+instruction[4] in      0.0000   0.0000   --      --      --         
+instruction[5] in      0.0000   0.0000   --      --      --         
+instruction[6] in      0.0000   0.0000   --      --      --         
+instruction[7] in      0.0000   0.0000   --      --      --         
+instruction[8] in      0.0000   0.0000   --      --      --         
+instruction[9] in      0.0000   0.0000   --      --      --         
+instruction[10]
+               in      0.0000   0.0000   --      --      --         
+instruction[11]
+               in      0.0000   0.0000   --      --      --         
+instruction[12]
+               in      0.0000   0.0000   --      --      --         
+instruction[13]
+               in      0.0000   0.0000   --      --      --         
+instruction[14]
+               in      0.0000   0.0000   --      --      --         
+instruction[15]
+               in      0.0000   0.0000   --      --      --         
+instruction[16]
+               in      0.0000   0.0000   --      --      --         
+instruction[17]
+               in      0.0000   0.0000   --      --      --         
+instruction[18]
+               in      0.0000   0.0000   --      --      --         
+instruction[19]
+               in      0.0000   0.0000   --      --      --         
+instruction[20]
+               in      0.0000   0.0000   --      --      --         
+instruction[21]
+               in      0.0000   0.0000   --      --      --         
+instruction[22]
+               in      0.0000   0.0000   --      --      --         
+instruction[23]
+               in      0.0000   0.0000   --      --      --         
+instruction[24]
+               in      0.0000   0.0000   --      --      --         
+instruction[25]
+               in      0.0000   0.0000   --      --      --         
+instruction[26]
+               in      0.0000   0.0000   --      --      --         
+instruction[27]
+               in      0.0000   0.0000   --      --      --         
+instruction[28]
+               in      0.0000   0.0000   --      --      --         
+instruction[29]
+               in      0.0000   0.0000   --      --      --         
+instruction[30]
+               in      0.0000   0.0000   --      --      --         
+instruction[31]
+               in      0.0000   0.0000   --      --      --         
+alu_control[0] out     0.1000   0.0000   --      --      --         
+alu_control[1] out     0.1000   0.0000   --      --      --         
+alu_control[2] out     0.1000   0.0000   --      --      --         
+alu_control[3] out     0.1000   0.0000   --      --      --         
+alu_src        out     0.1000   0.0000   --      --      --         
+atomic_flag    out     0.1000   0.0000   --      --      --         
+imm_src[0]     out     0.1000   0.0000   --      --      --         
+imm_src[1]     out     0.1000   0.0000   --      --      --         
+mem_write      out     0.1000   0.0000   --      --      --         
+pc_src         out     0.1000   0.0000   --      --      --         
+reg_write      out     0.1000   0.0000   --      --      --         
+reserved_flag  out     0.1000   0.0000   --      --      --         
+result_src     out     0.1000   0.0000   --      --      --         
+
+1

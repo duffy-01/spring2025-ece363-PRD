@@ -1,0 +1,21 @@
+ 
+****************************************
+Report : compile_options
+Design : control
+Version: W-2024.09-SP2
+Date   : Wed Apr  9 18:34:43 2025
+****************************************
+
+Design                                   Compile Option         Value
+--------------------------------------------------------------------------------
+control                                  flatten                false
+                                         structure              true
+                                         structure_boolean      false
+                                         structure_timing       true
+                                         isolate_port           disabled
+                                         multibit_options
+                                           optimization_mode    non_timing_driven
+                                           minimum_width        2
+                                           exclude_registers_with_timing_exceptions false
+--------------------------------------------------------------------------------
+1

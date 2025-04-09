@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : control
+Version: W-2024.09-SP2
+Date   : Wed Apr  9 18:34:42 2025
+****************************************
+
+Library(s) Used:
+
+    NangateOpenCellLibrary_TT (File: /proj/ece363-spring2025/lmb221/project-code/NangateOpenCellLibrary_typical.db)
+
+Number of ports:                           45
+Number of nets:                            95
+Number of cells:                           80
+Number of combinational cells:             74
+Number of sequential cells:                 4
+Number of macros/black boxes:               0
+Number of buf/inv:                         34
+Number of references:                      16
+
+Combinational area:                 61.180000
+Buf/Inv area:                       18.088000
+Noncombinational area:              10.640000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (Wire load has zero net area)
+
+Total cell area:                    71.820001
+Total area:                 undefined
+1
