@@ -1,0 +1,115 @@
+
+****************************************
+Report : constraint
+Design : control
+Version: W-2024.09-SP2
+Date   : Sun Apr 13 09:31:44 2025
+****************************************
+
+                                                   Weighted
+    Group (max_delay/setup)      Cost     Weight     Cost
+    -----------------------------------------------------
+    clk                          0.00      1.00      0.00
+    -----------------------------------------------------
+    max_delay/setup                                  0.00
+
+                                                   Weighted
+    Group (min_delay/hold)       Cost     Weight     Cost
+    -----------------------------------------------------
+    clk                          0.00      1.00      0.00
+    -----------------------------------------------------
+    min_delay/hold                                   0.00
+
+    Constraint                                       Cost
+    -----------------------------------------------------
+    max_delay/setup                                  0.00  (MET)
+    min_delay/hold                                   0.00  (MET)
+    sequential_clock_pulse_width                     0.00  (MET)
+    max_capacitance                                 15.51  (VIOLATED)
+    max_transition                                   0.00  (MET)
+    max_fanout                                       3.00  (VIOLATED)
+
+1
+****************************************
+Report : constraint
+	-all_violators
+	-verbose
+Design : control
+Version: W-2024.09-SP2
+Date   : Sun Apr 13 09:31:44 2025
+****************************************
+
+
+
+    Pin: U86/ZN
+
+    max_capacitance              6.00
+  - Capacitance                 10.75
+  ------------------------------
+    Slack                       -4.75  (VIOLATED)
+
+    Pin: U69/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  9.91
+  ------------------------------
+    Slack                       -3.91  (VIOLATED)
+
+    Pin: U87/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  7.75
+  ------------------------------
+    Slack                       -1.75  (VIOLATED)
+
+    Pin: U108/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  7.72
+  ------------------------------
+    Slack                       -1.72  (VIOLATED)
+
+    Pin: U71/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  7.21
+  ------------------------------
+    Slack                       -1.21  (VIOLATED)
+
+    Pin: U83/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  7.19
+  ------------------------------
+    Slack                       -1.19  (VIOLATED)
+
+    Pin: U79/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  6.37
+  ------------------------------
+    Slack                       -0.37  (VIOLATED)
+
+    Pin: U63/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  6.35
+  ------------------------------
+    Slack                       -0.35  (VIOLATED)
+
+    Pin: U82/ZN
+
+    max_capacitance              6.00
+  - Capacitance                  6.25
+  ------------------------------
+    Slack                       -0.25  (VIOLATED)
+
+
+    Pin: clk
+
+    max_fanout                   1.00
+  - Fanout                       4.00
+  ------------------------------
+    Slack                       -3.00  (VIOLATED)
+
+1
