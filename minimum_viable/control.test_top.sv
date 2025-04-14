@@ -12,7 +12,7 @@
 //************************************************************************
 
 module control_top;
-    parameter sim_cycle = 10;
+    parameter sim_cycle = 100;
     reg sys_clk;
 
     control_if top_if(sys_clk);
